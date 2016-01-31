@@ -2,8 +2,10 @@ var express = require('express');
 
 var app = express();
 
-app.listen('8080', function() {
-	console.info('App listening on port 8080');
+app.set('port', process.env.PORT || 8000);
+
+app.listen(app.get('port'), function() {
+	console.log('Express server listening on port ' + app.get('port'));
 });
 
 app.use('/', express.static(__dirname));
