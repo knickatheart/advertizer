@@ -6,7 +6,7 @@
 	return Backbone.View.extend({
 
 		initialize: function(options) {
-			_.bindAll(this, 'render');
+			_.bindAll(this, 'render', 'activateLazyLoad');
 
 			var _this = this;
 
@@ -14,9 +14,14 @@
 				_this.template = _.template(ItemTemplate);
 				
 				_this.render();
-			}).then(function() {
+			}).then(this.activateLazyLoad);
+		},
+
+		activateLazyLoad: function() {
+			$(function() {
 				$('img.lazy').lazyload({
-					effect : 'fadeIn'
+					effect: 'fadeIn',
+					threshold: 0
 				});
 			});
 		},
